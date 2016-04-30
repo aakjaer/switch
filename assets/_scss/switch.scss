@@ -3,8 +3,8 @@
 //  Switches
 //
 //
-//  Based on traditional checkboxes that are hidden and
-//  replaced by nifty equivalents.
+//  Based on traditional checkboxes which are hidden and
+//  replaced by nifty animated switches.
 //
 //
 ///////////////////////////////////////////////////////////////
@@ -19,12 +19,15 @@ $color-2: #979797; // gray
 $color-3: #DCDCDC; // light gray
 $color-4: #C1EFFF; // light blue
 
-$custom-checkbox-size: 30px;
+// proportions
 $switch-width: 55px;
 $switch-height: 30px;
+$switch-padding: 2px;
+$switch-knob-size: $switch-height - ($switch-padding * 2);
 
-$switch-knob-size: $switch-height - 4;
-
+// font icon values
+$swich-icon-on: "\e800";
+$swich-icon-off: "\e801";
 
 .switch {
     display: block;
@@ -32,39 +35,38 @@ $switch-knob-size: $switch-height - 4;
     @extend .checkbox;
     padding: 5px 0;
 
-    // use the regular checkbox as an invisible hotspot for nifty switchbox.
+    // general styles
+    input[type="checkbox"],
+    .switch__label::before,
+    .switch__icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: $switch-width;
+        height: $switch-height;
+        border-radius: $switch-height / 2;
+    }
+
     // make sure the real checkbox is on top of the other elements.
     input[type="checkbox"] {
         opacity: 0;
         z-index: 10;
-        position: absolute;
         margin: 0;
-        display: inline-block;
-        width: $switch-width;
-        height: $switch-height;
-        right: 0;
-        top: 0;
         cursor: pointer;
-        border-radius: $switch-height / 2;
     }
 
+    // text label next to the switch
     .switch__label {
+        display: block;
         position: relative;
         max-width: none;
         min-height: $switch-height;
-        display: block;
         padding: 0;
-        // padding-left: $switch-width + 15;
         color: #888;
-        transition: color 0.25s;
-        user-select: none;
-        backface-visibility: hidden;
-        transform: translateZ(0);
-    }
-
-    // only show hand cursor on labels
-    label.cb-label:hover {
-        cursor: pointer;
+        @include user-select(none);
+        @include transition(color 0.25s);
+        @include translate3d(0,0,0);
+        @include backface-visibility(hidden);
     }
 
     // checkmark icon
@@ -72,17 +74,11 @@ $switch-knob-size: $switch-height - 4;
     .switch__label::after {
         content: "";
         position: absolute;
-        transition: all 0.25s;
+        @include transition(all 0.25s);
     }
 
     // switch background
     .switch__label::before {
-        display: inline-block;
-        width: $switch-width;
-        height: $switch-height;
-        right: 0;
-        top: 0;
-        border-radius: $switch-height / 2;
         background: $color-3;
         will-change: transform;
     }
@@ -90,48 +86,43 @@ $switch-knob-size: $switch-height - 4;
     // switch knob
     .switch__label::after {
         display: block;
-        right: 0;
         top: 50%;
-        transform: translateX(-($switch-width - $switch-knob-size) + 3px) translateY(-50%);
+        right: 0;
         width: $switch-knob-size;
         height: $switch-knob-size;
+        @include translate(-($switch-width - $switch-knob-size) + $switch-padding, -50%);
         background: #fff;
         border-radius: 50%;
         border: 1px solid $color-2;
     }
 
-    // on/off icons
+    // on/off icon container
     .switch__icon {
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: $switch-width;
-        height: 100%;
 
         &::before,
         &::after {
             position: absolute;
             top: 50%;
             @extend .icon;
-            margin: 0;
-            transition: transform 0.2s, opacity 0.2s;
+            margin: 0 !important;
+            @include transition(transform 0.2s, opacity 0.2s);
+            font-size: 0.75em;
         }
 
+        // on icon
         &::before {
-            content: "\e803";
+            content: $swich-icon-on;
             opacity: 0;
-            right: 32px;
-            transform: translateX(8px) translateY(-50%);
-            font-size: 12px;
+            left: 15%;
+            @include translate(75%,-50%);
             color: $color-1;
         }
 
+        // off icon
         &::after {
-            content: "\e804";
-            right: 5px;
-            transform: translateX(0) translateY(-50%);
-            font-size: 16px;
+            content: $swich-icon-off;
+            right: 15%;
+            @include translate(0,-50%);
             color: $color-2;
         }
     }
@@ -146,31 +137,31 @@ $switch-knob-size: $switch-height - 4;
     input[type="checkbox"]:checked + .switch__label {
         color: black;
 
-        // background
+        // switch background
         &::before {
             background: $color-4;
         }
 
-        // knob
+        // switch knob
         &::after {
-            transform: translateX(-3px) translateY(-50%);
+            @include translate(-$switch-padding,-50%);
             border-color: rgba($color-1, 0.6);
         }
 
         // icon animations
         .switch__icon {
 
-            // check icon
+            // on icon
             &::before {
                 opacity: 1;
-                transform: translateX(0) translateY(-50%);
+                @include translate(0,-50%);
             }
 
+            // off icon
             &::after {
                 opacity: 0;
-                transform: translateX(-8px) translateY(-50%);
+                @include translate(-75% ,-50%);
             }
-
         }
     }
 }
