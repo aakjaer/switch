@@ -29,11 +29,15 @@ $switch-knob-size: $switch-height - ($switch-padding * 2);
 $swich-icon-on: "\e800";
 $swich-icon-off: "\e801";
 
+
+///////////////////////////////////////////////////////////////
+
+
 .switch {
     display: block;
     min-height: $switch-height;
     @extend .checkbox;
-    padding: 5px 0;
+    margin: 25px 0;
 
     // general styles
     input[type="checkbox"],
@@ -53,6 +57,7 @@ $swich-icon-off: "\e801";
         z-index: 10;
         margin: 0;
         cursor: pointer;
+        border: 1px solid lime;
     }
 
     // text label next to the switch
@@ -62,7 +67,7 @@ $swich-icon-off: "\e801";
         max-width: none;
         min-height: $switch-height;
         padding: 0;
-        color: #888;
+        color: $color-2;
         @include user-select(none);
         @include transition(color 0.25s);
         @include translate3d(0,0,0);
@@ -135,7 +140,6 @@ $swich-icon-off: "\e801";
     ///////////////////////////////////////
 
     input[type="checkbox"]:checked + .switch__label {
-        color: black;
 
         // switch background
         &::before {
@@ -164,4 +168,19 @@ $swich-icon-off: "\e801";
             }
         }
     }
+}
+
+///////////////////////////////////////
+
+//  disabled state
+
+///////////////////////////////////////
+
+input[type="checkbox"][disabled]:hover {
+    cursor: $cursor-disabled;
+}
+
+input[type="checkbox"][disabled] + .switch__label,
+input[type="checkbox"][disabled] + .switch__label::after {
+    opacity: 0.5;
 }
