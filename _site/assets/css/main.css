@@ -2473,7 +2473,9 @@ input[type="button"].btn-block {
     transform: translate(-27px, -50%);
     background: #fff;
     border-radius: 50%;
-    border: 1px solid #979797; }
+    border: 1px solid #979797;
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3); }
   .switch .switch__icon::before, .switch .switch__icon::after {
     position: absolute;
     top: 50%;
@@ -2490,7 +2492,7 @@ input[type="button"].btn-block {
     -ms-transform: translate(75%, -50%);
     -o-transform: translate(75%, -50%);
     transform: translate(75%, -50%);
-    color: #3AA3C8; }
+    color: #fff; }
   .switch .switch__icon::after {
     content: "";
     right: 15%;
@@ -2500,13 +2502,13 @@ input[type="button"].btn-block {
     transform: translate(0, -50%);
     color: #979797; }
   .switch input[type="checkbox"]:checked + .switch__label::before {
-    background: #C1EFFF; }
+    background: #45C0EC; }
   .switch input[type="checkbox"]:checked + .switch__label::after {
     -webkit-transform: translate(-2px, -50%);
     -ms-transform: translate(-2px, -50%);
     -o-transform: translate(-2px, -50%);
     transform: translate(-2px, -50%);
-    border-color: rgba(58, 163, 200, 0.6); }
+    border-color: #fff; }
   .switch input[type="checkbox"]:checked + .switch__label .switch__icon::before {
     opacity: 1;
     -webkit-transform: translate(0, -50%);
@@ -2525,7 +2527,7 @@ input[type="checkbox"][disabled]:hover {
 
 input[type="checkbox"][disabled] + .switch__label,
 input[type="checkbox"][disabled] + .switch__label::after {
-  opacity: 0.5; }
+  opacity: 0.6; }
 
 @font-face {
   font-family: 'fontello';
