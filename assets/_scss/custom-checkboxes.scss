@@ -1,0 +1,111 @@
+///////////////////////////////////////////////////////////////
+//
+//  Custom checkboxes
+//
+//
+//  Based on traditional checkboxes that are hidden and
+//  replaced by SVG equivalents.
+//
+//
+///////////////////////////////////////////////////////////////
+
+
+@import "custom-bootstrap-variables";
+
+
+
+// customisable variables
+$custom-checkbox-size: 30px;
+
+
+.custom-checkbox {
+    min-height: $custom-checkbox-size;
+    margin-bottom: 0;
+
+    // use the regular checkbox as an invisible hotspot for the SVG.
+    // make sure the real checkbox is on top of the SVG images.
+    input[type="checkbox"] {
+        opacity: 0;
+        z-index: 10;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    .cb-label {
+        position: relative;
+        max-width: none;
+        min-height: $custom-checkbox-size;
+        padding-left: $custom-checkbox-size + 15;
+        color: #888;
+        font-size: 1.1em;
+        transition: color 0.25s;
+        user-select: none;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+
+    // only show hand cursor on labels
+    label.cb-label:hover {
+        cursor: pointer;
+    }
+
+    input[type="checkbox"],
+    .cb-label::before,
+    .cb-label::after {
+        position: absolute;
+        display: inline-block;
+        width: $custom-checkbox-size;
+        height: $custom-checkbox-size;
+        left: 0;
+        top: 0;
+        border-radius: $border-radius-base;
+        /* backface-visibility: hidden; */
+    }
+
+    // checkmark icon
+    .cb-label::before,
+    .cb-label::after {
+        content: "";
+        top: -5px;
+        text-align: center;
+        transition: all 0.15s;
+    }
+
+    // checkbox background
+    .cb-label::before {
+        background: #eee;
+        will-change: transform;
+    }
+
+    // check icon
+    .cb-label::after {
+        content: "√";
+        @extend .icon;
+        opacity: 0;
+        font-size: $font-size-large;
+        line-height: $custom-checkbox-size;
+        color: white;
+        transform: translateY(-25%);
+        transition-delay: 0.1s;
+    }
+
+
+    ///////////////////////////////////////
+
+    //  checked state
+
+    ///////////////////////////////////////
+
+    input[type="checkbox"]:checked + .cb-label {
+        color: black;
+
+        &::before {
+            background: red;
+        }
+
+        &::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

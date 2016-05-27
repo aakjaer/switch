@@ -48,15 +48,6 @@ h6,.zeta    { }
 
 .text-white { color: white; }
 .text-faded { color: $text-color; }
-.text-blue { color: $brand-blue; }
-.text-dark-blue { color: $brand-dark-blue; }
-.text-light-blue { color: $brand-light-blue; }
-.text-red { color: $brand-red; }
-.text-yellow { color: $brand-yellow; }
-.text-gray { color: #777; }
-.text-light-gray { color: #bbb; }
-.text-purple { color: $brand-purple; }
-.text-green { color: $brand-green; }
 
 .all-caps {
     text-transform: uppercase;
@@ -123,10 +114,3 @@ hr {
 .separator-right { margin-right: 0; }
 .separator-white { border-color: white; }
 .separator-white-faded { border-color: rgba(white, 0.3); }
-.separator-light-blue { border-color: $brand-light-blue; }
-.separator-blue { border-color: $brand-blue; }
-.separator-dark-blue { border-color: $brand-blue; }
-.separator-red { border-color: $brand-red; }
-.separator-purple { border-color: $brand-purple; }
-.separator-green { border-color: $brand-green; }
-.separator-yellow { border-color: $brand-yellow; }
